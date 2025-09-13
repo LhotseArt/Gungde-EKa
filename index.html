@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Undangan Eka & Gungde</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet"/> 
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap" rel="stylesheet">
+
+  <!--<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">-->
+
+  <!-- Swiper (jika ingin digunakan kembali) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  
+  <style>
+    :root {
+      --primary-color: #a64ac9;
+      --bg-overlay: rgba(0, 0, 0, 0.4);
+      --section-bg: rgba(255, 255, 255, 0.2);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; transition: background-color 0.8s ease; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: transparent;
+      color: #fff;
+      overflow-x: hidden;
+    }
+     #opening {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(10, 9, 6, 0.184);
+      background-image: url('cover1.jpeg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      color: #ffffff;
+      text-shadow: 5px 5px 7px rgb(16, 7, 7);
+      font-family: 'Cormorant Garamond', serif;
+      text-align: center;
+      transition: all 1s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Video Background */
+  .background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('bg.jpeg') no-repeat center center;
+  background-size: cover;
+  z-index: -1; /* supaya ada di belakang semua konten */
+}
+
+
+    /* Header */
+    header {
+      height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding-top: 60px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    }
+    header h1 { font-family: 'Great Vibes', cursive; font-size: 64px; }
+    header p { font-size: 22px; font-family: 'Playfair Display', serif; }
+    .nama-tamu { font-size: 20px; margin-top: 20px; font-style: italic; color: #eee; }
+    @media (max-width: 480px) {
+      header h1 { font-size: 42px; }
+      header p { font-size: 18px; }
+    }
+
+    /* Button */
+    button {
+      padding: 10px 20px; background: var(--primary-color); color: #fff; border: none;
+      font-size: 16px; border-radius: 5px; cursor: pointer; margin-top: 10px;
+      transition: 0.3s;
+    }
+    button:hover { background: #fff; color: var(--primary-color); transform: scale(1.05); }
+
+    /* Navbar */
+    .navbar {
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(6px);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 20px; z-index: 1000;
+    }
+    .navbar .brand { font-size: 20px; font-weight: bold; font-family: 'Playfair Display', serif; }
+    .navbar .menu { display: flex; gap: 20px; }
+    .navbar a { color: #fff; text-decoration: none; font-weight: bold; }
+    .navbar a:hover { color: var(--primary-color); }
+    .navbar .toggle { display: none; font-size: 24px; cursor: pointer; }
+    .navbar .menu.mobile {
+      display: none; flex-direction: column; position: absolute; top: 60px; right: 20px;
+      background: rgba(0,0,0,0.9); border-radius: 8px; padding: 10px;
+    }
+    .navbar .menu.mobile.active { display: flex; }
+    .navbar .menu.mobile a { margin: 10px 0; }
+    @media (max-width: 768px) {
+      .navbar .menu.desktop { display: none; }
+      .navbar .toggle { display: block; }
+    }
+
+    /* Section */
+    .section {
+      padding: 80px 20px; text-align: center;
+      background: var(--section-bg); backdrop-filter: blur(8px);
+      margin-bottom: 20px; border-radius: 12px;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .section.visible { opacity: 1; transform: translateY(0); }
+    .section h2 { font-family: 'Playfair Display', serif; font-size: 32px; }
+    .countdown { font-size: 26px; margin-top: 20px; font-weight: bold; }
+    .maps iframe { width: 100%; height: 300px; border: none; border-radius: 8px; }
+    
+ .flip-clock {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-family: 'Courier New', monospace;
+}
+
+.flip-unit {
+  text-align: center;
+}
+
+.flip-label {
+  font-size: 14px;
+  margin-top: 4px;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(11, 2, 2, 0.6);
+}
+
+
+.flip {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px 10px;
+  font-size: 32px;
+  min-width: 60px;
+  border-radius: 6px;
+  box-shadow: inset 0 0 5px #0a0202;
+  transition: all 0.3s ease;
+}
+   @keyframes countdownChange {
+  0% { opacity: 0; transform: scale(1.3); }
+  100% { opacity: 1; transform: scale(1); }
+    }
+
+.countdown.animate {
+  animation: countdownChange 0.5s ease;
+    }
+
+    :root {
+      --primary-color: #45433e;
+      --bg-overlay: rgba(0, 0, 0, 0);
+      --section-bg: rgba(171, 168, 168, 0.403);
+    }
+    /* Heading Style Konsisten */
+.section h1,
+.section h2,
+.section h3 {
+  margin-top: 1.5rem;   /* jarak atas */
+  margin-bottom: 1.2rem; /* jarak bawah */
+  text-align: center;
+  line-height: 1.3;
+}
+
+.section h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(28px, 7vw, 56px);
+  color: #f6f6f4;
+  text-shadow: 5px 5px 7px rgb(11, 2, 2);
+}
+
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 6vw, 42px);
+  font-weight: 700;
+  color: #f6f6f4;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
+}
+
+.section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 5vw, 28px);
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+    .countdown {
+      font-size: 26px;
+      margin-top: 20px;
+      color: #fdfdfd;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgb(11, 2, 2);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; transition: background-color 0.8s ease; }
+    
+    /* Gallery Grid */
+    .gallery {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px; padding: 20px;
+    }
+    .gallery img {
+      width: 100%; border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      transition: transform 0.3s; object-fit: cover;
+      cursor: pointer;
+    }
+    .gallery img:hover { transform: scale(1.05); }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center;
+      visibility: hidden; opacity: 0; transition: opacity 0.5s;
+      z-index: 9998;
+    }
+    .lightbox.active { visibility: visible; opacity: 1; }
+    .lightbox img { max-width: 90%; max-height: 90%; border-radius: 10px; }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 30px;
+      font-size: 32px; color: #fff; cursor: pointer;
+    }
+
+    /* Form Ucapan */
+    .form-group { margin-bottom: 15px; text-align: left; max-width: 400px; margin-inline: auto; }
+    form input, form textarea {
+      width: 100%; padding: 10px; margin-top: 5px;
+      border: 1px solid #ccc; border-radius: 4px; font-size: 16px;
+    }
+
+    /* Music Toggle */
+    .music-toggle {
+      position: fixed; top: 100px; right: 20px;
+      z-index: 999; transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .music-toggle.hidden { opacity: 0; transform: translateY(-20px); pointer-events: none; }
+    #musicBtn {
+      padding: 10px; border: none; border-radius: 50%;
+      background: var(--primary-color); color: #fff; cursor: pointer;
+    }
+
+    /* Ucapan List */
+    .ucapan-item {
+      margin-bottom: 15px; padding: 10px;
+      background: rgba(255,255,255,0.1); border-radius: 8px;
+    }
+    .ucapan-item strong { color: var(--primary-color); }
+
+    /* Footer */
+    .footer { padding: 30px; background: rgba(0,0,0,0.4); text-align: center; font-size: 14px; }
+    
+    /* background foto section nama */
+    #section-judul {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+              url('judul.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 80px 20px;
+      color: white;
+    }
+    #section-lokasi {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+              url('lokasi.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 80px 20px;
+      color: white;
+    }
+    #section-countdown {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+              url('countdown.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 80px 20px;
+      color: white;
+    } 
+   #section-ucapan {
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+              url('ucapan.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 80px 20px;
+  color: white;
+  text-align: center;
+}
+
+#section-ucapan h2 {
+  margin-bottom: 30px;
+}
+
+#ucapanForm {
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+}
+
+#ucapanForm .form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+#ucapanForm label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#ucapanForm input, 
+#ucapanForm textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+#ucapanForm button {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#ucapanForm button:hover {
+  background: #219150;
+}
+
+#listUcapan li {
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+     /* Section Gungde */
+#section-gungde {
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)),
+              url('bggungde.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;            /* full tinggi layar */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;    /* teks turun ke bawah */
+  align-items: center;          /* teks rata tengah */
+  text-align: center;
+  color: white;
+  padding: 40px 20px;           /* jarak dalam section */
+}
+
+#section-gungde h3 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+#section-gungde p {
+  font-size: 18px;
+  margin-bottom: 30px;          /* jarak dari bawah */
+}
+
+/* Section Eka */
+#section-eka {
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)),
+              url('bgeka.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 40px 20px;
+}
+
+#section-eka h3 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+#section-eka p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+  </style>
+</head>
+<body>
+<div id="opening">
+  <h1 style="font-family: 'Great Vibes', cursive; font-size: 48px;">Gungde & Eka</h1>
+
+  <p style="font-size: 20px;">Kepada Yth.</p>
+  <h2 id="guestName">Tamu Undangan</h2>
+
+  <button onclick="bukaUndangan()" style="
+    margin-top: 30px;
+    font-style: italic; 
+    font-size: 18px;
+    padding: 12px 24px;
+    background: rgba(231, 234, 231, 0.52);
+    border: 1px solid rgba(9, 8, 8, 0.555);
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.738); /* ini efek bayangan */
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  " onmouseover="this.style.background='rgba(255,255,255,0.25)'" 
+     onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+    Buka Undangan
+  </button>
+</div>
+
+<!-- Background Video -->
+<div class="background-image"></div>
+
+<!-- Musik -->
+<audio id="music" loop>
+  <source src="musik.mp4" type="audio/mp4">
+</audio>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="brand">Gungde & Eka</div>
+  <div class="menu desktop">
+    <a href="#lokasi">Lokasi</a>
+    <a href="#galeri">Galeri</a>
+    <a href="#rsvp">Ucapan</a>
+  </div>
+  <div class="toggle" onclick="toggleDropdown()">☰</div>
+  <div class="menu mobile" id="mobileMenu">
+    <a href="#lokasi" onclick="toggleDropdown()">Lokasi</a>
+    <a href="#galeri" onclick="toggleDropdown()">Galeri</a>
+    <a href="#rsvp" onclick="toggleDropdown()">Ucapan</a>
+  </div>
+</nav>
+
+<header>
+  <h1>Gungde & Eka</h1>
+  <p>Undangan Pernikahan</p>
+  <p class="nama-tamu" id="tamu"></p>
+  <div class="music-toggle" id="musicToggle">
+    <button onclick="toggleMusic()" id="musicBtn" aria-label="Toggle Music">🔊</button>
+  </div>
+</header>
+
+<section class="section" id="section-judul">
+  <h1>Dengan hormat,</h1>
+  <h2>Kami mengundang Bapak/Ibu/Saudara/i untuk hadir di acara pernikahan kami:</h2>
+</section>
+  <section class="section" id="section-gungde">  
+  <h3>I Dewa Gede Agung Swardewa</h3>
+  <p>Putra dari Bapak I Dewa Gede Oka Mega & Ibu Ni Wayan Sutarmi</p>
+  </section>
+<section class="section" id="section-eka">
+  <h3>Ni Putu Eka Liana Febiananda</h3>
+  <p>Putri dari Bapak Wijaya Arianto & Ibu Ni Wayan Erayanti</p>
+  </section>
+
+<section class="section" id="section-lokasi">
+  <h2>Waktu & Tempat</h2>
+  <p><strong>Tanggal:</strong> Minggu, 17 Oktober 2025</p>
+  <p><strong>Waktu:</strong> 10:00 - 24:00 WITA</p>
+  <p><strong>Tempat:</strong> Jl. Pakse Bali Klungkung</p>
+   <!--<iframe src="https://www.google.com/maps/embed?..."></iframe> -->
+  <a href="https://maps.app.goo.gl/9veg3YX26HmMoKv38" target="_blank" style="
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: rgba(26, 27, 24, 0.287);
+  color: #fbfdfb;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.841);
+  transition: all 0.3s ease;
+">
+  📍 Lihat Lokasi di Google Maps
+</a>
+</section>
+<section class="section" id="section-countdown">
+  <h2>Hitung Mundur</h2>
+  <div class="flip-clock" id="countdown">
+  <div class="flip-unit">
+    <div class="flip" id="days">00</div>
+    <div class="flip-label">Hari</div>
+  </div>
+  <div class="flip-unit">
+    <div class="flip" id="hours">00</div>
+    <div class="flip-label">Jam</div>
+  </div>
+  <div class="flip-unit">
+    <div class="flip" id="minutes">00</div>
+    <div class="flip-label">Menit</div>
+  </div>
+  <div class="flip-unit">
+    <div class="flip" id="seconds">00</div>
+    <div class="flip-label">Detik</div>
+  </div>
+</div>
+</section>
+
+<!-- Galeri -->
+<section class="section" id="galeri">
+  <h2>Galeri Kenangan</h2>
+  <div class="gallery">
+    <img src="1.jpeg" alt="Foto 1">
+    <img src="2.jpeg" alt="Foto 2">
+    <img src="3.jpeg" alt="Foto 3">
+    <img src="4.jpeg" alt="Foto 4">
+    <img src="5.jpeg" alt="Foto 5">
+    <img src="6.jpeg" alt="Foto 6">
+    <img src="7.jpeg" alt="Foto 7">
+    <img src="8.jpeg" alt="Foto 8">
+    <img src="9.jpeg" alt="Foto 9">
+    <img src="10.jpeg" alt="Foto 10">
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <img id="lightboxImg" src="" alt="Preview Foto">
+</div>
+
+<!-- Ucapan -->
+<section class="section" id="section-ucapan" >
+  <h2>Beri Ucapan</h2>
+  <form id="ucapanForm">
+    <div class="form-group">
+      <label>Nama:</label>
+      <input type="text" name="nama" required/>
+    </div>
+    <div class="form-group">
+      <label>Ucapan:</label>
+      <textarea name="pesan" rows="3" required placeholder="Tulis ucapan terbaik Anda..."></textarea>
+    </div>
+    <button type="submit">Kirim</button>
+  </form>
+  <div id="daftarUcapan" style="margin-top:30px; text-align:left; max-width:600px; margin-inline:auto;">
+    <h3>Ucapan dari Tamu</h3>
+    <ul id="listUcapan" style="list-style:none; padding:0;"></ul>
+    <button id="resetUcapan" style="margin-top:15px; background:#c0392b; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">
+      Reset Semua Ucapan
+    </button>
+  </div>
+</section>
+
+<div class="footer">©️ 2025 Gungde & Eka Wedding — Terima kasih atas doa & kehadirannya</div>
+
+<!-- Scripts -->
+<script>
+  // Toggle Menu
+  function toggleDropdown() {
+    document.getElementById("mobileMenu").classList.toggle("active");
+  }
+  // === Ambil Nama dari URL ===
+document.addEventListener("DOMContentLoaded", () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  let guestName = urlParams.get("to");
+
+  if (guestName) {
+    // Decode agar + atau %20 jadi spasi normal
+    guestName = decodeURIComponent(guestName.replace(/\+/g, " "));
+
+    // Isi otomatis ke input "Nama" di form ucapan
+    const namaInput = document.querySelector('#ucapanForm input[name="nama"]');
+    if (namaInput) {
+      namaInput.value = guestName;
+      namaInput.setAttribute("readonly", true); // 🔒 supaya tidak bisa diubah
+    }
+
+    // Tampilkan juga di opening (jika ada elemen guestName)
+    const openingName = document.getElementById("guestName");
+    if (openingName) {
+      openingName.textContent = guestName;
+    }
+  }
+});
+  // Musik
+  const music = document.getElementById("music");
+  let isPlaying = true;
+  const musicBtn = document.getElementById("musicBtn");
+  function toggleMusic() {
+    if (isPlaying) { music.pause(); musicBtn.textContent = "🔈"; }
+    else { music.play(); musicBtn.textContent = "🔊"; }
+    isPlaying = !isPlaying;
+  }
+
+    // Countdown Flip Clock
+ const targetDate = new Date("2025-10-17T14:00:00+08:00").getTime();
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if (distance < 0) {
+      document.getElementById("days").textContent = "00";
+      document.getElementById("hours").textContent = "00";
+      document.getElementById("minutes").textContent = "00";
+      document.getElementById("seconds").textContent = "00";
+      return;
+    }
+
+    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").textContent = String(d).padStart(2, '0');
+    document.getElementById("hours").textContent = String(h).padStart(2, '0');
+    document.getElementById("minutes").textContent = String(m).padStart(2, '0');
+    document.getElementById("seconds").textContent = String(s).padStart(2, '0');
+
+    // Tambahkan animasi jika ingin efek flip (sederhana)
+    const units = ["days", "hours", "minutes", "seconds"];
+    units.forEach(id => {
+      const el = document.getElementById(id);
+      el.classList.remove("animate");
+      void el.offsetWidth;
+      el.classList.add("animate");
+    });
+  }
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+
+  // Opening
+  function bukaUndangan() {
+    const opening = document.getElementById("opening");
+    opening.style.opacity = "0";
+    setTimeout(() => {
+      opening.style.display = "none";
+      document.body.style.overflow = "auto";
+      music.play().catch(()=>{});
+    }, 1000);
+  }
+  document.body.style.overflow = "hidden";
+
+
+  // Animasi Muncul
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add("visible"); observer.unobserve(e.target); }
+    });
+  }, {threshold:0.1});
+  document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+
+  // Music toggle + Navbar
+  let lastScrollTop=0; const musicToggle=document.getElementById("musicToggle"); const navbar=document.querySelector(".navbar");
+  window.addEventListener("scroll",()=>{
+    const st=window.pageYOffset||document.documentElement.scrollTop;
+    if(st>lastScrollTop){ musicToggle.classList.add("hidden"); }
+    else { musicToggle.classList.remove("hidden"); }
+    lastScrollTop=st<=0?0:st;
+    navbar.style.background=window.scrollY>50?"rgba(0,0,0,0.9)":"rgba(0,0,0,0.6)";
+  });
+  
+
+  // Ucapan (localStorage)
+  const formUcapan=document.getElementById("ucapanForm");
+  const listUcapan=document.getElementById("listUcapan");
+  let ucapanList=JSON.parse(localStorage.getItem("ucapanList"))||[];
+
+  function renderUcapan(){
+    listUcapan.innerHTML="";
+    ucapanList.slice().reverse().forEach(item=>{
+      const li=document.createElement("li");
+      li.className="ucapan-item";
+      li.innerHTML=`<strong>${item.nama}</strong><br/>${item.pesan}`;
+      listUcapan.appendChild(li);
+    });
+  }
+  renderUcapan();
+
+  formUcapan.addEventListener("submit",e=>{
+    e.preventDefault();
+    const nama=formUcapan.nama.value.trim();
+    const pesan=formUcapan.pesan.value.trim();
+    if(!nama||!pesan) return;
+    ucapanList.push({nama,pesan});
+    localStorage.setItem("ucapanList",JSON.stringify(ucapanList));
+    formUcapan.reset(); renderUcapan();
+  });
+
+  document.getElementById("resetUcapan").addEventListener("click",()=>{
+    if(confirm("Yakin ingin menghapus semua ucapan?")){
+      localStorage.removeItem("ucapanList");
+      ucapanList=[]; renderUcapan();
+    }
+  });
+
+  // Lightbox
+  const lightbox=document.getElementById("lightbox");
+  const lightboxImg=document.getElementById("lightboxImg");
+  document.querySelectorAll(".gallery img").forEach(img=>{
+    img.addEventListener("click",()=>{
+      lightboxImg.src=img.src;
+      lightbox.classList.add("active");
+    });
+  });
+  function closeLightbox(){ lightbox.classList.remove("active"); }
+  lightbox.addEventListener("click", e=>{ if(e.target===lightbox) closeLightbox(); });
+</script>
+</body>
+</html>
